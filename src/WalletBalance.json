@@ -1,6 +1,27 @@
 [
     {
         "token": "123GH78JK",
-        "value": 200
+        "value": 200,
+        "img": "https://cbdc.netlify.app/images/200.jpg"
+    },
+    {
+        "token": "456GH78JK",
+        "value": 200,
+        "img": "https://cbdc.netlify.app/images/200.jpg"
+    },
+    {
+        "token": "145GH78JK",
+        "value": 500,
+        "img": "https://cbdc.netlify.app/images/500.jpg"
+    },
+    {
+        "token": "893GH78JK",
+        "value": 2000,
+        "img": "https://cbdc.netlify.app/images/2000.jpg"
+    },
+    {
+        "token": "983GH78JK",
+        "value": 100,
+        "img": "https://cbdc.netlify.app/images/100.jpg"
     }
 ]

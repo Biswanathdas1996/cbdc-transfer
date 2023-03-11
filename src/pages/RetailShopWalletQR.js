@@ -5,7 +5,7 @@ function Home() {
   return (
     <div>
       <QRCode
-        value={`8001691299`}
+        value={`0Xfr563280594738ij90`}
         size={256}
         level={"H"}
         bgColor={"#ffffff"}

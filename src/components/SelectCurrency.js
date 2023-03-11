@@ -13,34 +13,36 @@ import FiveHundrad from "../assets/500.jpg";
 import TwoHundrad from "../assets/200.jpg";
 import OneHundrad from "../assets/100.jpg";
 
-export default function SelectCurrency() {
+import MultiSelect from "../utils/MultiSelect";
+
+export default function SelectCurrency({ getSelectedNote }) {
   return (
     <Container>
       <Grid container spacing={2}>
-        <Grid item xs={8} style={{ display: "none" }}>
-          <Card sx={{ maxWidth: 345 }}>
-            <CardMedia
-              sx={{ height: 140 }}
-              image={TwoThousand}
-              title="green iguana"
-            />
-            <CardMedia
-              sx={{ height: 140 }}
-              image={FiveHundrad}
-              title="green iguana"
-            />
-            <CardMedia
-              sx={{ height: 140 }}
-              image={TwoHundrad}
-              title="green iguana"
-            />
-            <CardMedia
-              sx={{ height: 140 }}
-              image={OneHundrad}
-              title="green iguana"
-            />
-            <CardContent>2000</CardContent>
-          </Card>
+        <Grid item xs={12} style={{ display: "none" }}>
+          <CardMedia
+            sx={{ height: 140 }}
+            image={TwoThousand}
+            title="green iguana"
+          />
+          <CardMedia
+            sx={{ height: 140 }}
+            image={FiveHundrad}
+            title="green iguana"
+          />
+          <CardMedia
+            sx={{ height: 140 }}
+            image={TwoHundrad}
+            title="green iguana"
+          />
+          <CardMedia
+            sx={{ height: 140 }}
+            image={OneHundrad}
+            title="green iguana"
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <MultiSelect getSelectedNote={getSelectedNote} />
         </Grid>
       </Grid>
     </Container>

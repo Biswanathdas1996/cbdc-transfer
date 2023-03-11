@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import GenerateQR from "./pages/GenerateQR";
 import RetailShopWalletQR from "./pages/RetailShopWalletQR";
 import Scanner from "./pages/Scanner";
+import Balance from "./pages/Balance";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Route exact path="/retail" element={<RetailShopWalletQR />} />
       <Route exact path="/generate-qr" element={<GenerateQR />} />
       <Route exact path="/scanner" element={<Scanner />} />
+      <Route exact path="/balance" element={<Balance />} />
     </Routes>
   );
 }
