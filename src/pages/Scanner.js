@@ -1,19 +1,16 @@
 import React, { useState } from "react";
 import { QrReader } from "react-qr-reader";
+import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container";
+import Button from "@mui/material/Button";
+import DeleteIcon from "@mui/icons-material/Delete";
+import PhotoCamera from "@mui/icons-material/PhotoCamera";
+
+import SelectCurrency from "../components/SelectCurrency";
 
 function QRScanner() {
   const [qrCodeData, setQRCodeData] = useState(null);
   const [cameraActive, setCameraActive] = useState(false);
-
-  const handleScan = (data) => {
-    if (data) {
-      setQRCodeData(data);
-    }
-  };
-
-  const handleError = (err) => {
-    console.error(err);
-  };
 
   const openCamera = () => {
     navigator.mediaDevices
@@ -28,17 +25,56 @@ function QRScanner() {
 
   return (
     <div>
+      <Container>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            {cameraActive && (
+              <QrReader
+                onResult={(result, error) => {
+                  if (!!result) {
+                    setQRCodeData(result?.text);
+                    setCameraActive(false);
+                  }
+
+                  if (!!error) {
+                    console.info(error);
+                  }
+                }}
+                constraints={{ facingMode: "environment" }}
+                style={{ width: "100%" }}
+              />
+            )}
+          </Grid>
+          <Grid item xs={3}></Grid>
+          <Grid item xs={6}>
+            {!qrCodeData ? (
+              <Button
+                variant="contained"
+                onClick={openCamera}
+                endIcon={<PhotoCamera />}
+              >
+                Scan QR
+              </Button>
+            ) : (
+              <Button
+                color="error"
+                variant="contained"
+                onClick={() => {
+                  setQRCodeData(null);
+                }}
+                endIcon={<DeleteIcon />}
+              >
+                Reset
+              </Button>
+            )}
+          </Grid>
+          <Grid item xs={3}></Grid>
+          <Grid item xs={12}>
+            <SelectCurrency />
+          </Grid>
+        </Grid>
+      </Container>
       {qrCodeData && <p>{qrCodeData}</p>}
-      {!qrCodeData && <button onClick={openCamera}>Open camera</button>}
-      {cameraActive && (
-        <QrReader
-          delay={300}
-          onError={handleError}
-          onScan={handleScan}
-          style={{ width: "100%" }}
-          constraints={{ facingMode: "environment" }}
-        />
-      )}
     </div>
   );
 }
