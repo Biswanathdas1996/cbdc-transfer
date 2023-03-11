@@ -30,7 +30,7 @@ function QRScanner() {
     console.log("--notes-->", notes);
     console.log("---qrCodeData->", qrCodeData);
 
-    const combineDta = JSON.stringify(notes) + qrCodeData;
+    const combineDta = JSON.stringify(notes) + "SPL" + qrCodeData;
     console.log("---combineDta->", combineDta);
     const encryptedData = btoa(combineDta);
     setGeneratedQRData(encryptedData);
