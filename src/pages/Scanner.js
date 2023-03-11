@@ -36,7 +36,7 @@ function QRScanner() {
           onError={handleError}
           onScan={handleScan}
           style={{ width: "100%" }}
-          videoConstraints={{ facingMode: "environment" }}
+          constraints={{ facingMode: "environment" }}
         />
       )}
     </div>
