@@ -5,7 +5,6 @@ import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
@@ -38,8 +37,8 @@ export default function BasicGrid() {
       <Grid container spacing={2}>
         <Grid item xs={3}></Grid>
         <Grid item xs={6}>
-          <Card style={{ padding: 10 }}>
-            <h2>{total} E-Rupee</h2>
+          <Card style={{ padding: 10, textAlign: "center" }}>
+            <h3>{total} e₹</h3>
           </Card>
         </Grid>
         <Grid item xs={3}></Grid>

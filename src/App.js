@@ -13,6 +13,9 @@ import RestoreIcon from "@mui/icons-material/Restore";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Paper from "@mui/material/Paper";
+import SendToMobileIcon from "@mui/icons-material/SendToMobile";
+import AddToHomeScreenIcon from "@mui/icons-material/AddToHomeScreen";
+import QrCode2Icon from "@mui/icons-material/QrCode2";
 
 function App() {
   return (
@@ -24,7 +27,7 @@ function App() {
         <Route exact path="/generate-qr" element={<GenerateQR />} />
         <Route exact path="/scanner" element={<Scanner />} />
         <Route exact path="/balance" element={<Balance />} />
-        <Route exact path="/recieve" element={<RecieveScaner />} />
+        <Route exact path="/recieve/:token" element={<RecieveScaner />} />
       </Routes>
       <LabelBottomNavigation />
     </>
@@ -49,7 +52,7 @@ function LabelBottomNavigation() {
               label="Send"
               value="recents"
               // onClick={() => history.push("/scanner")}
-              icon={<RestoreIcon />}
+              icon={<SendToMobileIcon />}
             />
           </NavLink>
           <NavLink to="/recieve" exact activeClassName="active">
@@ -57,7 +60,7 @@ function LabelBottomNavigation() {
               label="Recieve"
               value="favorites"
               // onClick={() => history.push("/recieve")}
-              icon={<FavoriteIcon />}
+              icon={<AddToHomeScreenIcon />}
             />
           </NavLink>
           <NavLink to="/retail" exact activeClassName="active">
@@ -65,7 +68,7 @@ function LabelBottomNavigation() {
               label="Reatil"
               value="nearby"
               // onClick={() => history.push("/retail")}
-              icon={<LocationOnIcon />}
+              icon={<QrCode2Icon />}
             />
           </NavLink>
           <NavLink to="/balance" exact activeClassName="active">

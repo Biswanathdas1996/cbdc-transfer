@@ -30,10 +30,22 @@ function QRScanner() {
     console.log("--notes-->", notes);
     console.log("---qrCodeData->", qrCodeData);
 
-    const combineDta = JSON.stringify(notes) + "SPL" + qrCodeData;
-    console.log("---combineDta->", combineDta);
+    const getCurrentBalance = localStorage.getItem("balance");
+    const parseGetCurrentBalance = JSON.parse(getCurrentBalance);
+    const remainingBalance = parseGetCurrentBalance?.filter((data, index) => {
+      const findNote = notes.find((val) => val?.token == data?.token);
+      if (!findNote) {
+        return data;
+      }
+    });
+
+    localStorage.setItem("balance", JSON.stringify(remainingBalance));
+    const combineDta = JSON.stringify(notes);
+
     const encryptedData = btoa(combineDta);
-    setGeneratedQRData(encryptedData);
+    const recievedURL = `https://cbdc.netlify.app/#/recieve/${encryptedData}`;
+    console.log(recievedURL);
+    setGeneratedQRData(recievedURL);
   };
 
   const getSelectedNote = (data) => {
@@ -41,17 +53,22 @@ function QRScanner() {
   };
   return (
     <Container>
+      <h1 style={{ textAlign: "center" }}>Pay eRupee</h1>
       <Grid container spacing={2}>
         {generatedQRData ? (
           <Grid item xs={12} style={{ padding: 10, margin: 10 }}>
             <center>
               <QRCode
                 value={generatedQRData}
-                size={256}
+                size={300}
                 level={"H"}
                 bgColor={"#ffffff"}
                 fgColor={"#000000"}
               />
+
+              <p>
+                <a href={generatedQRData}>Reciever Link</a>
+              </p>
             </center>
           </Grid>
         ) : (
@@ -73,39 +90,49 @@ function QRScanner() {
                   style={{ width: "100%" }}
                 />
               )}
-              <h3>{qrCodeData && <p>{qrCodeData}</p>}</h3>
+              <h3 style={{ textAlign: "center" }}>
+                {qrCodeData && <b>{qrCodeData}</b>}
+              </h3>
             </Grid>
-            <Grid item xs={3}></Grid>
-            <Grid item xs={6}>
-              {!qrCodeData ? (
-                <Button
-                  variant="contained"
-                  onClick={openCamera}
-                  endIcon={<PhotoCamera />}
-                >
-                  Scan QR
-                </Button>
-              ) : (
-                <Button
-                  color="error"
-                  variant="contained"
-                  onClick={() => {
-                    setQRCodeData(null);
-                  }}
-                  endIcon={<DeleteIcon />}
-                >
-                  Reset
-                </Button>
-              )}
+
+            <Grid item xs={12}>
+              <center>
+                {!qrCodeData ? (
+                  <Button
+                    variant="contained"
+                    onClick={openCamera}
+                    endIcon={<PhotoCamera />}
+                  >
+                    Scan QR
+                  </Button>
+                ) : (
+                  <Button
+                    color="error"
+                    variant="contained"
+                    onClick={() => {
+                      setQRCodeData(null);
+                    }}
+                    endIcon={<DeleteIcon />}
+                  >
+                    Reset
+                  </Button>
+                )}
+              </center>
             </Grid>
-            <Grid item xs={3}></Grid>
+
             <Grid item xs={12}>
               <SelectCurrency getSelectedNote={getSelectedNote} />
             </Grid>
             <Grid item xs={12}>
-              <Button variant="contained" onClick={generateQR}>
-                Generate QR
-              </Button>
+              <center>
+                <Button
+                  variant="contained"
+                  color="success"
+                  onClick={generateQR}
+                >
+                  Generate QR
+                </Button>
+              </center>
             </Grid>
           </>
         )}

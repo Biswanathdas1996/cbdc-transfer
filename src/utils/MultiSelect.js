@@ -20,7 +20,7 @@ function DynamicMultiSelect({ getSelectedNote }) {
       const parseData = JSON.parse(getBalance);
       const selectOption = parseData?.map((data, index) => {
         return {
-          value: JSON.stringify(data),
+          value: data,
           label: data?.value,
         };
       });
