@@ -16,6 +16,7 @@ import Paper from "@mui/material/Paper";
 import SendToMobileIcon from "@mui/icons-material/SendToMobile";
 import AddToHomeScreenIcon from "@mui/icons-material/AddToHomeScreen";
 import QrCode2Icon from "@mui/icons-material/QrCode2";
+import HomeIcon from "@mui/icons-material/Home";
 
 function App() {
   return (
@@ -48,6 +49,14 @@ function LabelBottomNavigation() {
     <Paper sx={{ position: "fixed", bottom: 0, width: "100%" }} elevation={3}>
       <center>
         <BottomNavigation value={value} onChange={handleChange}>
+          <NavLink to="/" exact activeClassName="active">
+            <BottomNavigationAction
+              label="Home"
+              value="favorites"
+              // onClick={() => history.push("/recieve")}
+              icon={<HomeIcon />}
+            />
+          </NavLink>
           <NavLink to="/scanner" exact activeClassName="active">
             <BottomNavigationAction
               label="Send"
@@ -56,14 +65,7 @@ function LabelBottomNavigation() {
               icon={<SendToMobileIcon />}
             />
           </NavLink>
-          <NavLink to="/recieve" exact activeClassName="active">
-            <BottomNavigationAction
-              label="Recieve"
-              value="favorites"
-              // onClick={() => history.push("/recieve")}
-              icon={<AddToHomeScreenIcon />}
-            />
-          </NavLink>
+
           <NavLink to="/retail" exact activeClassName="active">
             <BottomNavigationAction
               label="Reatil"
