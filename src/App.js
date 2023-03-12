@@ -30,6 +30,7 @@ function App() {
         <Route exact path="/recieve/:token" element={<RecieveScaner />} />
       </Routes>
       <LabelBottomNavigation />
+      <div style={{ marginBottom: 80 }}></div>
     </>
   );
 }

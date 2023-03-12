@@ -31,6 +31,7 @@ export default function BasicGrid() {
 
   const fundWallet = () => {
     const data = _.uniqBy(Data, "token");
+    setNotes(data);
     localStorage.setItem("balance", JSON.stringify(data));
   };
 
@@ -63,13 +64,27 @@ export default function BasicGrid() {
           );
         })}
 
-        <Grid item xs={3}></Grid>
         <Grid item xs={6}>
-          <Button variant="contained" onClick={fundWallet}>
-            Reset Wallet Balance
-          </Button>
+          <center>
+            <Button variant="contained" color="success" onClick={fundWallet}>
+              Fund Wallet
+            </Button>
+          </center>
         </Grid>
-        <Grid item xs={3}></Grid>
+        <Grid item xs={6}>
+          <center>
+            <Button
+              variant="outlined"
+              color="error"
+              onClick={() => {
+                localStorage.clear();
+                setNotes(null);
+              }}
+            >
+              Empty Wallet
+            </Button>
+          </center>
+        </Grid>
       </Grid>
     </Container>
   );
