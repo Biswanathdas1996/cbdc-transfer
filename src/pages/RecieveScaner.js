@@ -33,9 +33,18 @@ function QRScanner() {
   useEffect(() => {
     const plaintext = atob(token);
     console.log("plaintext", plaintext);
+
     const notesData = JSON.parse(plaintext);
     setNotes(notesData);
-    localStorage.setItem("balance", JSON.stringify(notesData));
+
+    const getCurrentNoteData = localStorage.getItem("balance");
+    const perseCurrentNoteData = JSON.parse(getCurrentNoteData);
+
+    const walletData = [...notesData, ...perseCurrentNoteData];
+    console.log("perseCurrentNoteData=====>", perseCurrentNoteData);
+    console.log("walletData=====>", walletData);
+
+    localStorage.setItem("balance", JSON.stringify(walletData));
   }, []);
 
   return (
