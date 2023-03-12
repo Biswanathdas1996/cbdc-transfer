@@ -12,6 +12,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
+import _ from "lodash";
 
 function QRScanner() {
   const [qrCodeData, setQRCodeData] = useState(null);
@@ -38,13 +39,16 @@ function QRScanner() {
     setNotes(notesData);
 
     const getCurrentNoteData = localStorage.getItem("balance");
-    const perseCurrentNoteData = JSON.parse(getCurrentNoteData);
+    let perseCurrentNoteData;
+    if (getCurrentNoteData) {
+      perseCurrentNoteData = JSON.parse(getCurrentNoteData);
+    } else {
+      perseCurrentNoteData = [];
+    }
 
     const walletData = [...notesData, ...perseCurrentNoteData];
-    console.log("perseCurrentNoteData=====>", perseCurrentNoteData);
-    console.log("walletData=====>", walletData);
-
-    localStorage.setItem("balance", JSON.stringify(walletData));
+    const data = _.uniqBy(walletData, "token");
+    localStorage.setItem("balance", JSON.stringify(data));
   }, []);
 
   return (

@@ -7,6 +7,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import QRCode from "qrcode.react";
 import SelectCurrency from "../components/SelectCurrency";
+import _ from "lodash";
 
 function QRScanner() {
   const [qrCodeData, setQRCodeData] = useState(null);
@@ -38,8 +39,8 @@ function QRScanner() {
         return data;
       }
     });
-
-    localStorage.setItem("balance", JSON.stringify(remainingBalance));
+    const data = _.uniqBy(remainingBalance, "token");
+    localStorage.setItem("balance", JSON.stringify(data));
     const combineDta = JSON.stringify(notes);
 
     const encryptedData = btoa(combineDta);

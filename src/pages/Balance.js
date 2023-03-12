@@ -8,6 +8,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import _ from "lodash";
 
 import Data from "../WalletBalance.json";
 
@@ -29,7 +30,8 @@ export default function BasicGrid() {
   }, []);
 
   const fundWallet = () => {
-    localStorage.setItem("balance", JSON.stringify(Data));
+    const data = _.uniqBy(Data, "token");
+    localStorage.setItem("balance", JSON.stringify(data));
   };
 
   return (
